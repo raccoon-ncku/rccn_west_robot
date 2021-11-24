@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <robot xmlns:xacro="https://ros.org/wiki/xacro">
+        <xacro:macro name="rail" params="prefix">
+            <link name="${prefix}e1_rail">
+                <visual>
+                    <geometry>
+                        <mesh filename="package://rccn_west_robot/meshes/rail/visual/rail.stl"/>
+                    </geometry>
+                    <material name="">
+                        <color rgba="1.0 1.0 1.0 1.0"/>
+                    </material>
+                </visual>
+                <collision>
+                    <geometry>
+                        <mesh filename="package://rccn_west_robot/meshes/rail/collision/rail.stl"/>
+                    </geometry>
+                </collision>
+            </link>
+
+            <joint name="${prefix}joint_e1" type="prismatic">
+                <parent link="${prefix}e1_rail"/>
+                <child link="${prefix}e1_plate"/>
+                <!-- Here we enter the joint position just defined before -->
+                <origin xyz="0.00000000 0.00000000 0.00000000" rpy="0.00000000 0.00000000 0.00000000"/>
+                <!-- Here we define the axis along which the geometry is moved -->
+                <axis xyz="1 0 0"/>
+                <!-- Here we define the joint's upper and lower limits -->
+                <limit effort="1000.0" lower="0.0" upper="4.266" velocity="0.25"/>
+            </joint>
+
+            <link name="${prefix}e1_plate">
+                <visual>
+                    <geometry>
+                        <mesh filename="package://rccn_west_robot/meshes/rail/visual/plate.stl"/>
+                    </geometry>
+                    <material name="">
+                        <color rgba="1.0 1.0 1.0 1.0"/>
+                    </material>
+                </visual>
+                <collision>
+                    <geometry>
+                        <mesh filename="package://rccn_west_robot/meshes/rail/collision/plate.stl"/>
+                    </geometry>
+                </collision>
+            </link>
+
+        </xacro:macro>
+    </robot>

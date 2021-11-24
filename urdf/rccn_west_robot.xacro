@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+    <robot name="rccn_west_robot" xmlns:xacro="https://ros.org/wiki/xacro">
+        
+        <xacro:property name="west_prefix" value="west_" />
+        <!-- rail -->
+        <xacro:include filename="rail.xacro"/>
+        <!-- kuka kr300 r2500 pro -->
+        <xacro:include filename="$(find kuka_kr300_support)/urdf/kr300r2500pro.xacro" />
+
+        <link name="world" />
+
+        <joint name="${west_prefix}world_joint" type="fixed">
+            <parent link="world" />
+            <child link="${west_prefix}e1_rail" />
+            <origin xyz="0.03750000 2.40330000 -0.00200000" rpy="0.00000000 0.00000000 0.00316232" />
+        </joint>
+
+        <xacro:rail prefix="${west_prefix}"/>
+
+        <joint name="${west_prefix}attachment_joint" type="fixed">
+            <parent link="${west_prefix}e1_plate" />
+            <child link="${west_prefix}base_link" />
+            <origin xyz="-0.00043000 -0.00044000 -0.00000000" rpy="0.00000184 0.00009015 0.00206101" />
+        </joint>
+
+        <!-- kuka kr300 r2500 pro -->
+        <xacro:kuka_kr300r2500pro prefix="${west_prefix}"/>
+
+    </robot>
